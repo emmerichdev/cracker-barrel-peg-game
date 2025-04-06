@@ -53,7 +53,14 @@ export const Board = {
     ): void => {
       const middle = Board.toPosition(middleRow, middlePos);
       const end = Board.toPosition(endRow, endPos);
+
       if (middle !== -1 && end !== -1) {
+        // Fix for diagonal issues - ensure geometry is consistent
+        // Positions 10 to 5 shouldn't be connected (through position 7)
+        if ((position === 10 && end === 5) || (position === 5 && end === 10)) {
+          return; // Skip this invalid diagonal
+        }
+        
         results.push([middle, end]);
       }
     };
