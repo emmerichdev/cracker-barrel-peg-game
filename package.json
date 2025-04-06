@@ -22,8 +22,8 @@
     "react",
     "express"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Emmerich",
+  "license": "MIT",
   "dependencies": {
     "concurrently": "^8.2.2"
   }

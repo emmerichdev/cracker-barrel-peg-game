@@ -2,6 +2,8 @@ export type Position = number;
 export type Board = boolean[];
 export type Move = [Position, Position, Position]; // [from, over, to]
 
+import { Board } from './Board';
+
 // Constants
 export const BOARD_SIZE = 15;
 export const DEFAULT_EMPTY_POSITION = 0; // Top position
@@ -66,32 +68,7 @@ export class Game {
     { top: 180, left: 90 }
   ];
   
-  // Valid moves mapping: [from, over, to]
-  // Each entry represents a possible jump: from, over, to
-  private readonly validMoves: Move[] = [
-    // Moves from row 1
-    [1, 3, 6], [1, 4, 8],
-    [2, 4, 7], [2, 5, 9],
-    // Moves from row 2
-    [3, 1, 0], [3, 4, 5], [3, 7, 12],
-    [4, 7, 11], [4, 8, 13],
-    [5, 2, 0], [5, 4, 3], [5, 8, 12], [5, 9, 14],
-    // Moves from row 3
-    [6, 3, 1], [6, 7, 8],
-    [7, 4, 2], [7, 8, 9],
-    [8, 4, 1], [8, 7, 6],
-    [9, 5, 2], [9, 8, 7],
-    // Moves from row 4
-    [10, 6, 3], [10, 11, 12],
-    [11, 7, 4], [11, 12, 13],
-    [12, 7, 3], [12, 8, 5], [12, 11, 10], [12, 13, 14],
-    [13, 8, 4], [13, 12, 11],
-    [14, 9, 5], [14, 13, 12],
-    // Additional reverse moves
-    [0, 1, 3], [0, 2, 5],
-    [3, 7, 12], [5, 8, 12], [5, 9, 14],
-    [6, 7, 8], [9, 8, 7],
-  ];
+  private readonly validMoves: Move[] = Board.generateMoves();
 
   constructor() {
     // Initialize the board with all pegs, except position 0 (top) is empty
